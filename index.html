@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="no-cache" name="turbolinks-cache-control">
+    <meta name="description" content="Приглашение на свадьбу Константина и Ксении 12.09.2026">
+    <meta name="author" content="Максим Фетисов">
+
+    <meta property="og:title" content="12.09.2026">
+    <meta property="og:description" content="Приглашение на свадьбу Константина и Ксении">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <!-- <meta property="og:url" content="https://maxim-and-anastasia.netlify.app/"> -->
+    <!-- <meta property="og:image" content="https://maxim-and-anastasia.netlify.app/assets/290_resized.jpg"> -->
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="K & K Wedding">
+
+    <title>Константин & Ксения</title>
+
+    <link rel="shortcut icon" type="image/png" href="./assets/images/icon128-128.png">
+    <link rel="apple-touch-icon" sizes="128" href="./assets/images/icon128-128.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <link rel="stylesheet" href="./styles/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* PRELOADER ЭКРАН */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #efcba2 0%, #de9883 50%, #d47882 75%, #c8b1cd 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow: hidden;
+        }
+
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .preloader-icon {
+            font-size: 4rem;
+            animation: heartbeat 1.3s ease infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .preloader-title {
+            font-size: 1.5rem;
+            color: #a5543a;
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+        }
+
+        .preloader-names {
+            font-size: 1rem;
+            color: #4b2c2d;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1.5rem;
+            border: 3px solid #f0e5d8;
+            border-top: 3px solid #4b2c2d;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .preloader-progress {
+            width: 200px;
+            height: 2px;
+            background: #f0e5d8;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .preloader-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #4b2c2d;
+            transition: width 0.3s ease;
+        }
+
+        .preloader-percent {
+            font-size: 0.8rem;
+            color: #4b2c2d;
+            margin-top: 0.5rem;
+            font-family: monospace;
+        }
+
+        /* ОСНОВНОЙ КОНТЕНТ (изначально скрыт) */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-icon">💍</div>
+            <div class="preloader-title">Свадебное приглашение</div>
+            <div class="preloader-names">Константин & Ксения</div>
+            <div class="preloader-spinner"></div>
+            <div class="preloader-progress">
+                <div class="preloader-progress-bar" id="progressBar"></div>
+            </div>
+            <div class="preloader-percent" id="percentText">0%</div>
+        </div>
+    </div>
+
+    <main class="main-content" id="mainContent">
+        <section class="hero">
+            <img class="hero-background" src="./assets/images/hero.png" alt="Свадебная пара на закате" loading="eager">
+            <div class="overlay"></div>
+            <div class="hero-content">
+                <div class="names">
+                    <span class="name">Константин</span>
+                    <span class="ampersand">&</span>
+                    <span class="name">Ксения</span>
+                </div>
+                <div class="divider"></div>
+                <div class="wedding-date">
+                    12 сентября 2026
+                </div>
+                <div class="invite-note">
+                    Вместе с вами создадим этот день
+                </div>
+            </div>
+        </section>
+        <section class="calendar-section">
+            <div class="calendar-container">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <h2 class="section-title">Дорогие гости</h2>
+                    <p class="section-subtitle">
+                        Мы будем рады разделить с вами этот особенный день<br>
+                        и создать воспоминания, которые останутся с нами навсегда
+                    </p>
+
+                    <div class="calendar-wrapper">
+                        <div class="calendar-header">
+                            <div class="calendar-month-year">
+                                <span>Сентябрь</span>
+                                <span>2026</span>
+                            </div>
+                        </div>
+
+                        <div class="calendar-weekdays">
+                            <div>Пн</div>
+                            <div>Вт</div>
+                            <div>Ср</div>
+                            <div>Чт</div>
+                            <div>Пт</div>
+                            <div>Сб</div>
+                            <div>Вс</div>
+                        </div>
+
+                        <div class="calendar-days" id="calendarDays"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="program-section">
+            <div class="program-container">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <h2 class="program-title">Программа праздника</h2>
+
+                    <div class="timer-wrapper">
+                        <div class="timer-label">До праздника осталось совсем чуть-чуть</div>
+                        <div class="timer" id="timer">
+                            <div class="timer-block">
+                                <span id="days">00</span>
+                                <span class="timer-unit">дней</span>
+                            </div>
+                            <div class="timer-block">
+                                <span id="hours">00</span>
+                                <span class="timer-unit">часов</span>
+                            </div>
+                            <div class="timer-block">
+                                <span id="minutes">00</span>
+                                <span class="timer-unit">минут</span>
+                            </div>
+                            <div class="timer-block">
+                                <span id="seconds">00</span>
+                                <span class="timer-unit">секунд</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-time">15:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🥂</div>
+                                <div class="timeline-title">Сбор гостей / Фуршет</div>
+                                <div class="timeline-desc">Встреча гостей, легкие закуски и напитки</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">16:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">💍</div>
+                                <div class="timeline-title">Церемония бракосочетания</div>
+                                <div class="timeline-desc">Торжественная регистрация брака</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">17:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🍽️</div>
+                                <div class="timeline-title">Банкет</div>
+                                <div class="timeline-desc">Праздничный ужин, тосты и танцы</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-time">22:30</div>
+                            <div class="timeline-content">
+                                <div class="timeline-icon">🎆</div>
+                                <div class="timeline-title">Завершение вечера</div>
+                                <div class="timeline-desc">Финальный фейерверк и прощание с гостями</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="location-section">
+            <div class="location-container">
+                <h2 class="location-title">Место проведения</h2>
+
+                <div class="location-info">
+                    <div class="restaurant-name">Ресторан «Варенье»</div>
+                    <div class="restaurant-address">Пос. Варские, ул. Биатлонная, д. 7</div>
+                </div>
+
+                <div class="location-photo-wrapper">
+                    <img class="location-photo" src="./assets/images/restaurant.jpeg" alt="Ресторан Варенье">
+                    <div class="photo-overlay"></div>
+                </div>
+
+                <div class="map-button-wrapper">
+                    <a href="https://yandex.ru/maps/-/CPslvZ78" class="map-button" target="_blank"
+                        rel="noopener noreferrer">
+                        <span class="map-icon">📍</span>
+                        Показать на карте
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="dresscode-section">
+            <div class="dresscode-container">
+                <div class="card-bg"></div>
+                <div class="card-content">
+
+                    <h2 class="dresscode-title">Палитра свадьбы</h2>
+                    <p class="dresscode-subtitle">Пожалуйста, учитывайте цветовую гамму при выборе наряда</p>
+
+                    <div class="palette-wrapper">
+                        <div class="palette-column">
+                            <div class="color-palette">
+                                <div class="color-item" style="background: #1A1A1A;">
+                                    <span class="color-name">Черный</span>
+                                </div>
+                                <div class="color-item" style="background: #e7decb;">
+                                    <span class="color-name">Бежевый</span>
+                                </div>
+                                <div class="color-item" style="background: #d9883b;">
+                                    <span class="color-name">Закатный оранжевый</span>
+                                </div>
+                                <div class="color-item" style="background: #a9b2c6;">
+                                    <span class="color-name">Небесно-голубой</span>
+                                </div>
+                                <div class="color-item" style="background: #ebbc59;">
+                                    <span class="color-name">Рассветный жёлтый</span>
+                                </div>
+                                <div class="color-item" style="background: #577140;">
+                                    <span class="color-name">Зелёный</span>
+                                </div>
+                                <div class="color-item" style="background: #2C2C2C;">
+                                    <span class="color-name">Темно-серый</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dresscode-rules">
+                        <div class="rule-card">
+                            <h3>Для дам</h3>
+                            <p>Элегантные вечерние платья, костюмы в пастельных и приглушенных тонах из представленной
+                                палитры</p>
+                        </div>
+
+                        <div class="rule-card">
+                            <h3>Для джентльменов</h3>
+                            <p>Черные классические костюмы с акцентом на аксессуарах в цветах нашей свадьбы</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="form-container">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <h2 class="form-title">Подтвердите своё присутствие</h2>
+                    <p class="form-subtitle">Пожалуйста, ответьте на несколько вопросов по ссылке, чтобы мы могли
+                        организовать всё наилучшим образом</p>
+
+                    <a class="form-button" href="https://forms.yandex.ru/cloud/6a0dbd6549af476dc6215701/"
+                        target="_blank">Заполнить форму
+                        <span class="arrow-icon">→</span></a>
+
+                    <!-- <div class="form-wrapper">
+                        <script src="https://forms.yandex.ru/_static/embed.js"></script>
+                        <iframe src="https://forms.yandex.ru/cloud/6a0dbd6549af476dc6215701?iframe=1" frameborder="0"
+                            name="ya-form-6a0dbd6549af476dc6215701" frameborder="0" class="yandex-form"
+                            title="Форма подтверждения присутствия"></iframe>
+                    </div> -->
+
+                    <div class="form-note">
+                        <p>Пожалуйста, заполните форму до 1 августа 2026 года</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="chat-section">
+            <div class="chat-container">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <h2 class="chat-title">Присоединяйтесь!</h2>
+                    <p class="chat-subtitle">Вступите в наш Vk-чат, чтобы быть в курсе всех деталей и общаться с гостями
+                    </p>
+
+                    <div class="qr-wrapper">
+                        <div class="qr-code" id="qrCode">
+                            <a href="https://vk.me/join/OtGT628aYAiFYvBo6gpdfysNsCt6LrVQDno=" target="_blank"
+                                rel="noopener noreferrer">
+                                <img src="./assets/images/vk-qr.jpg" alt="QR-код для вступления в чат" width="200"
+                                    height="200">
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="chat-note">
+                        <p>Наведите камеру на QR-код или нажмите на него, чтобы присоединиться к чату</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="surprise-section">
+            <div class="surprise-container">
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <div class="surprise-icon">🎁</div>
+                    <h2 class="surprise-title">Готовите сюрприз?</h2>
+                    <p class="surprise-subtitle">
+                        Если вы хотите поздравить молодоженов оригинально или подготовить особенный сюрприз,<br>
+                        пожалуйста, свяжитесь с организатором, чтобы согласовать детали
+                    </p>
+
+                    <div class="organizer-card">
+                        <div class="organizer-photo">
+                            <img src="./assets/images/nataly.jpg" alt="Организатор" />
+                        </div>
+                        <div class="organizer-info">
+                            <div class="organizer-name">Наталья Рузмайкина</div>
+                            <div class="organizer-role">Свадебный организатор</div>
+                        </div>
+                        <a href="tel:+79109024295" class="organizer-phone">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M4.00655 7.93309C3.93421 9.84122 4.41713 13.0817 7.6677 16.3323C8.45191 17.1165 9.23553 17.7396 10 18.2327M5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1147 9.8278 10.1147 9.8278 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C15.2529 20.0243 14.1963 19.9541 13 19.6111"
+                                        stroke="black" stroke-width="1.5" stroke-linecap="round"></path>
+                                </g>
+                            </svg>
+                            <span>+7 (910) 902-42-05</span>
+                            <span class="arrow-icon">→</span>
+                        </a>
+                    </div>
+
+                    <div class="surprise-note">
+                        <p>Сохраняйте сюрприз в тайне! Организатор поможет воплотить любую вашу идею</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="gallery-container">
+
+                <div class="card-bg"></div>
+                <div class="card-content">
+                    <h2 class="gallery-title">Наши моменты</h2>
+                    <p class="gallery-subtitle">Немного счастливых мгновений в преддверии нашего праздника</p>
+
+                    <div class="slider-wrapper">
+                        <span class="heart-decoration">❤️</span>
+                        <div class="slider" id="slider">
+                            <div class="slide">
+                                <img src="./assets/images/galery/1.jpg" alt="Фото 1">
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/galery/2.jpg" alt="Фото 2">
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/galery/3.jpg" alt="Фото 3">
+                            </div>
+                        </div>
+
+                        <button class="slider-btn prev" id="prevSlide">‹</button>
+                        <button class="slider-btn next" id="nextSlide">›</button>
+                    </div>
+
+                    <div class="slider-dots" id="sliderDots"></div>
+
+                    <div class="gallery-footer">
+                        <p>С нетерпением ждём встречи с вами!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        (function () {
+            document.body.style.overflow = 'hidden';
+            const preloader = document.getElementById('preloader');
+            const mainContent = document.getElementById('mainContent');
+            const progressBar = document.getElementById('progressBar');
+            const percentText = document.getElementById('percentText');
+
+            let loadedCount = 0;
+            let totalResources = 0;
+            let loadingCompleted = false;
+            let minTimeReached = false;
+            const MIN_DISPLAY_TIME = 1000;
+            const startTime = Date.now();
+
+            function getAllResources() {
+                const images = document.querySelectorAll('img');
+                const resources = [];
+
+                images.forEach(img => {
+                    if (img.src && !img.complete) {
+                        resources.push({ type: 'img', element: img });
+                    }
+                });
+
+                const heroBg = document.querySelector('.hero-background');
+                if (heroBg && heroBg.src && !heroBg.complete) {
+                    if (!resources.some(r => r.element === heroBg)) {
+                        resources.push({ type: 'img', element: heroBg });
+                    }
+                }
+
+                return resources;
+            }
+
+            function updateProgress() {
+                const percent = Math.min(Math.floor((loadedCount / totalResources) * 100), 100);
+                progressBar.style.width = percent + '%';
+                percentText.textContent = percent + '%';
+
+                if (loadedCount >= totalResources && totalResources > 0) {
+                    loadingCompleted = true;
+                    checkAndFinish();
+                }
+            }
+
+            function checkAndFinish() {
+                const elapsed = Date.now() - startTime;
+                if (loadingCompleted && elapsed >= MIN_DISPLAY_TIME) {
+                    finishLoading();
+                }
+            }
+
+            function finishLoading() {
+                document.body.style.overflow = '';
+                preloader.classList.add('hide');
+                mainContent.classList.add('visible');
+
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    heroContent.style.animation = 'none';
+                    heroContent.offsetHeight; // принудительный reflow
+                    heroContent.style.animation = 'fadeInUp 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards';
+                }
+
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+
+            function startLoading() {
+                const allResources = getAllResources();
+                totalResources = allResources.length;
+
+                if (totalResources === 0) {
+                    loadingCompleted = true;
+                    checkAndFinish();
+                    return;
+                }
+
+                allResources.forEach(resource => {
+                    if (resource.type === 'img') {
+                        const img = resource.element;
+                        if (img.complete) {
+                            loadedCount++;
+                            updateProgress();
+                        } else {
+                            img.addEventListener('load', () => {
+                                loadedCount++;
+                                updateProgress();
+                            });
+                            img.addEventListener('error', () => {
+                                loadedCount++;
+                                updateProgress();
+                            });
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener('load', () => {
+                const remainingImages = document.querySelectorAll('img');
+                let remainingCount = 0;
+                remainingImages.forEach(img => {
+                    if (!img.complete) remainingCount++;
+                });
+
+                if (remainingCount === 0 && loadedCount < totalResources) {
+                    loadedCount = totalResources;
+                    updateProgress();
+                }
+            });
+
+            setTimeout(() => {
+                minTimeReached = true;
+                checkAndFinish();
+            }, MIN_DISPLAY_TIME);
+
+            startLoading();
+        })();
+    </script>
+    <script src="./scripts/index.js" type="module"></script>
+</body>
+
+</html>
