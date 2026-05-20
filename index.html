@@ -164,7 +164,11 @@
 
     <main class="main-content" id="mainContent">
         <section class="hero">
-            <img class="hero-background" src="./assets/images/hero.png" alt="Свадебная пара на закате" loading="eager">
+            <picture class="hero-background">
+                <source media="(max-width: 768px)" srcset="./assets/images/hero-mobile.png">
+                <source media="(min-width: 769px)" srcset="./assets/images/hero.png">
+                <img src="./assets/images/hero.png" alt="Свадебная пара  на закате">
+            </picture>
             <div class="overlay"></div>
             <div class="hero-content">
                 <div class="names">
@@ -274,9 +278,9 @@
                         <div class="timeline-item">
                             <div class="timeline-time">22:30</div>
                             <div class="timeline-content">
-                                <div class="timeline-icon">🎆</div>
+                                <div class="timeline-icon">🎸</div>
                                 <div class="timeline-title">Завершение вечера</div>
-                                <div class="timeline-desc">Финальный фейерверк и прощание с гостями</div>
+                                <div class="timeline-desc">Финальный аккорд дня</div>
                             </div>
                         </div>
                     </div>
