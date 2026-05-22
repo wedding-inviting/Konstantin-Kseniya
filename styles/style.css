@@ -1694,6 +1694,48 @@ body {
   border-radius: 5px;
 }
 
+.marquee-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  background: var(--accent-color);
+  padding: 0.8rem 0;
+}
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--subtitle-color);
+  letter-spacing: 2px;
+  font-family: 'Georgia', serif;
+  padding: 0 2rem;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Для мобильных */
+@media (max-width: 640px) {
+  .marquee-content {
+    font-size: 0.9rem;
+  }
+}
+
 .gallery-footer {
   margin-top: 2rem;
   font-size: 1.1rem;
