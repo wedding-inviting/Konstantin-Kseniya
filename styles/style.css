@@ -94,6 +94,39 @@ body {
   /* animation: fadeInUp 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; */
 }
 
+.romantic-line {
+  margin-top: 2rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.romantic-line span {
+  display: inline-block;
+  font-size: clamp(0.9rem, 4vw, 1.5rem);
+  letter-spacing: 3px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #f9e0b0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(249, 224, 176, 0.4);
+    opacity: 0.7;
+  }
+
+  50% {
+    text-shadow: 0 0 20px rgba(249, 224, 176, 0.9), 0 0 10px #f39c12;
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
 /* Имена молодоженов */
 .names {
   font-size: clamp(2rem, 10vw, 5rem);
@@ -1574,6 +1607,8 @@ body {
 
 .slider-wrapper {
   position: relative;
+  max-width: 768px;
+  margin: 0 auto;
   width: 100%;
   overflow: hidden;
   border-radius: 24px;
