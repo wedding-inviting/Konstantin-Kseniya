@@ -62,19 +62,21 @@
 
         .preloader-icon {
             font-size: 4rem;
-            animation: heartbeat 1.3s ease infinite;
+            animation: heartbeat 2s ease infinite;
             margin-bottom: 1.5rem;
+            transform-origin: bottom;
+            transform: rotateZ(-10deg);
         }
 
         @keyframes heartbeat {
 
             0%,
             100% {
-                transform: scale(1);
+                transform: rotateZ(-10deg);
             }
 
             50% {
-                transform: scale(1.15);
+                transform: rotateZ(10deg);
             }
         }
 
@@ -337,7 +339,7 @@
                                 <div class="color-item" style="background: #d9883b;">
                                     <span class="color-name">Закатный оранжевый</span>
                                 </div>
-                                <div class="color-item" style="background: #a9b2c6;">
+                                <div class="color-item" style="background: #87CEEB;">
                                     <span class="color-name">Небесно-голубой</span>
                                 </div>
                                 <div class="color-item" style="background: #ebbc59;">
